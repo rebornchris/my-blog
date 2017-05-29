@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <header-nav></header-nav>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import HeaderNav from './components/common/nav.vue'
 export default {
-  name: 'app'
+  components: {
+    HeaderNav
+  }
 }
 </script>
 
