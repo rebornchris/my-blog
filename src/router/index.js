@@ -1,23 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Me from '../components/pages/Me'
-// import Post from '../components/pages/Post'
+import Post from '../components/pages/Post'
 import Tags from '../components/pages/Tags'
-import Index from '../components/pages/Index'
+import Project from '../components/pages/Project'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
-      component: Index
+      name: 'Post',
+      component: Post
     },
-    // {
-    //   path: '/',
-    //   name: 'Post',
-    //   component: Hello
-    // },
     {
       path: '/tags',
       name: 'Tags',
@@ -27,6 +22,11 @@ export default new Router({
       path: '/Me',
       name: 'Me',
       component: Me
+    },
+    {
+      path: '/project',
+      name: 'Project',
+      component: Project
     }
   ]
 })
