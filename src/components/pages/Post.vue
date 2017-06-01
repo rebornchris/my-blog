@@ -100,6 +100,7 @@ export default {
           color: #666;
           height: 40px;
           width: 230px;
+
         }
       }
 
