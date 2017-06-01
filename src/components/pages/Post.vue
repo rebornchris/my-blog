@@ -11,28 +11,16 @@
         <p>这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试这就是个测试</p>
       </div>
     </div>
-    <div class="slide-bar">
-      <div class="search">
-        <input type="text" name="" value="Search">
-      </div>
-      <div class="recent">
-        <div class="recent-title">
-          Recent
-        </div>
-        <ul>
-          <li>第一篇</li>
-          <li>第二篇</li>
-          <li>第三篇</li>
-          <li>第四篇</li>
-          <li>第五篇</li>
-        </ul>
-      </div>
-    </div>
+    <Slider></Slider>
   </div>
 </template>
 
 <script>
+import Slider from '../common/slider.vue'
 export default {
+  components: {
+    Slider
+  }
 }
 </script>
 
@@ -41,7 +29,7 @@ export default {
     width: 1200px;
     margin: 0 auto;
     padding-left: 20px;
-    padding-top: 80px;
+    padding-top: 50px;
     display: flex;
     justify-content: flex-start;
 
@@ -81,52 +69,6 @@ export default {
         overflow: hidden;
         text-align: justify;
 
-      }
-    }
-
-    .slide-bar{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 300px;
-      .search{
-        padding-left: 35px;
-
-        input{
-          padding: 8px 12px 8px 12px;
-          outline: none;
-          box-sizing: border-box;
-          line-height: 1.5;
-          color: #666;
-          height: 40px;
-          width: 230px;
-
-        }
-      }
-
-      .recent{
-        width: 300px;
-        margin-top: 30px;
-        height: 400px;
-        padding-left: 35px;
-        color: #6E7173;
-        font-family: sans-serif;
-        .recent-title{
-          padding: 20px 15px;
-          border-bottom: 1px solid #ddd;
-          font-size: 24px;
-          text-align: left;
-        }
-
-        ul{
-          list-style-type: none;
-          margin-top: 10px;
-          padding: 15px;
-          li{
-            text-align: left;
-            margin-top: 10px;
-          }
-        }
       }
     }
   }

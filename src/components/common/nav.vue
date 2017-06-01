@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style lang='less'>
+<style lang='less' scoped>
 @font-face {
     font-family: 'satisfy';
     font-style: normal;
@@ -37,10 +37,10 @@ export default {
     src: local('satisfy'), local('satisfy'), url(../../assets/satisfy.woff);
   }
 .nav-container{
-  position: absolute;
+  /* position: absolute;
   top: 0;
   right: 0;
-  left: 0;
+  left: 0; */
   z-index: 100;
   background: #fff;
   box-shadow: 0 0 4px rgba(0,0,0,0.25);

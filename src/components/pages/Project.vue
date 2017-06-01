@@ -1,5 +1,5 @@
-<template lang="html">
-  <div class="">
+<template>
+  <div class="project-list">
     <h2>this is project</h2>
   </div>
 </template>
@@ -9,5 +9,14 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="less" scoped>
+.project-list{
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #999;
+  justify-content: center;
+  align-items: center;
+}
 </style>
