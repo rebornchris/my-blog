@@ -48,7 +48,7 @@ export default {
   .nav-top{
     max-width: 1200px;
     margin: 0 auto;
-    height: 40px;
+    height: 80px;
     padding: 25px 0;
     display: flex;
     justify-content: space-between;

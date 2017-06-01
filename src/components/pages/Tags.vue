@@ -26,8 +26,7 @@ export default {
   padding-top: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  /* justify-content: flex-start; */
+  justify-content: flex-start;
   .something{
     font: 'TIBch', 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB',
                           'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;

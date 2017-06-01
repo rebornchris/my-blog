@@ -49,7 +49,6 @@ export default {
     input{
       padding: 8px 12px 8px 12px;
       outline: none;
-      box-sizing: border-box;
       line-height: 1.5;
       color: #666;
       height: 40px;
