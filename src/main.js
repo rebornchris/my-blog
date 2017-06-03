@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+import VueSimplemde from 'vue-simplemde'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+Vue.use(VueSimplemde)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

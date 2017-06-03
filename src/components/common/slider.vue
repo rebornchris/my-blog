@@ -77,7 +77,7 @@ export default {
       padding: 15px;
       li{
         white-space: nowrap;
-        overflow: auto;
+        overflow: hidden;
         text-overflow: ellipsis;
         text-align: left;
         margin-top: 10px;

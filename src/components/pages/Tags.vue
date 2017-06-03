@@ -20,9 +20,9 @@ export default {
 
 <style lang="less" scoped>
 .tags-list{
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding-left: 20px;
+  padding-left: 250px;
   padding-top: 50px;
   display: flex;
   flex-direction: row;

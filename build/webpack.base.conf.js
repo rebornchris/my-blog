@@ -20,8 +20,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
+      'vue$': 'vue/dist/vue.common.js',
+      'src': resolve('src'),
+      'assets': resolve('src/assets'),
+      'components': resolve('src/components')
     }
   },
   module: {
@@ -42,7 +44,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test')],
       },
       // {
       //   test: /\.(css|scss)$/,

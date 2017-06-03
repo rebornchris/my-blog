@@ -5,18 +5,33 @@
         <img src="../../assets/logo.jpeg" alt="" class="logo">
         <span class="brand">RebornChris</span>
       </a>
-      <ul class="nav-list">
+      <ul class="nav-list" v-if="$route.path.indexOf('/back') === -1">
         <router-link :to="{name:'Post'}">
-          <li>Articles</li>
+          <li :class="{ cur: $route.name === 'Post' }">Articles</li>
         </router-link>
         <router-link :to="{name:'Tags'}">
-          <li>Tags</li>
+          <li :class="{ cur: $route.name === 'Tags' }">Tags</li>
         </router-link>
         <router-link :to="{name:'Project'}">
-          <li>Things</li>
+          <li :class="{ cur: $route.name === 'Project' }">Things</li>
         </router-link>
         <router-link :to="{name:'Me'}">
-          <li>Me</li>
+          <li :class="{ cur: $route.name === 'Me' }">Me</li>
+        </router-link>
+
+      </ul>
+      <ul class="nav-list" v-if="$route.path.indexOf('/back') !== -1">
+        <router-link :to="{name:'createArticle'}">
+          <li>CreateArticle</li>
+        </router-link>
+        <router-link :to="{name:''}">
+          <li>ViewArticles</li>
+        </router-link>
+        <router-link :to="{name:''}">
+          <li>ChangeArticle</li>
+        </router-link>
+        <router-link :to="{name:''}">
+          <li>Comments</li>
         </router-link>
       </ul>
     </nav>
@@ -98,8 +113,12 @@ export default {
         &:hover{
           border-bottom: 1px solid #42b983;
         }
+
       }
 
+      .cur{
+        border-bottom: 1px solid #42b983;
+      }
 
     }
   }
