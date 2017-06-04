@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="">
-    <h2>this is me</h2>
-  </div>
+    <div class="">
+      <h2>this is me</h2>
+    </div>
 </template>
 
 <script>
