@@ -94,7 +94,7 @@ export default {
     }
 
     .markdown-editor{
-      overflow: scroll;
+  //    overflow: auto;
       color: black;
       margin-top: 20px;
       height: 600px;
@@ -104,7 +104,8 @@ export default {
   .preview{
     width: 45%;
     height: 100%;
-    overflow: scroll;
+    overflow: auto;
+
   //  background-color: #666;
   }
 
