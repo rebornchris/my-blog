@@ -18,6 +18,10 @@
       <div class="markdown-editor">
         <markdown-editor v-model="content" ref="markdownEditor"></markdown-editor>
       </div>
+      <div class="button-group">
+        <button type="button" name="submit">初始化</button>
+        <button type="button" name="submit"></button>
+      </div>
     </div>
     <div class="preview">
       <p v-html='compiledMarkdown'></p>
@@ -94,7 +98,6 @@ export default {
     }
 
     .markdown-editor{
-  //    overflow: auto;
       color: black;
       margin-top: 20px;
       height: 600px;
@@ -106,13 +109,33 @@ export default {
     height: 100%;
     overflow: auto;
 
-  //  background-color: #666;
   }
 
-  .button-type{
-    align-self: flex-end;
-    height: 300px;
-    width: 133px;
+  .button-group{
+
+    display: flex;
+    justify-content: space-around;
+    button{
+      /* color: black;
+      background-color: #fff; */
+      border: none;
+      height: 30px;
+      width: 70px;
+      background-color: rgb(0, 171, 255);
+      padding: 5px 15px;
+      color: white;
+      border-radius: 2px;
+    //  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+      cursor: pointer;
+      outline: none;
+      transition: background-color .3s ease;
+      &:hover {
+        background-color: rgb(0, 151, 255);
+      }
+      &:active {
+        background-color: rgb(0, 131, 255);
+      }
+    }
   }
 }
 </style>

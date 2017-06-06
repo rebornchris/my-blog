@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backstage of blog",
+  "main": "index.js",
+  "scripts": {
+    "server": "node app.js"
+  },
+  "author": "rebronchris",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.9.1",
+    "bcrypt": "^1.0.2"
+  }
+}
