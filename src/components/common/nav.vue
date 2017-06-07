@@ -22,13 +22,10 @@
       </ul>
       <ul class="nav-list" v-if="$route.path.indexOf('/back') !== -1">
         <router-link :to="{name:'createArticle'}">
-          <li>CreateArticle</li>
+          <li :class="{ cur: $route.name === 'createArticle' }">CreateArticle</li>
         </router-link>
-        <router-link :to="{name:''}">
-          <li>ViewArticles</li>
-        </router-link>
-        <router-link :to="{name:''}">
-          <li>ChangeArticle</li>
+        <router-link :to="{name:'viewArticles'}">
+          <li :class="{ cur: $route.name === 'viewArticles' }">ViewArticles</li>
         </router-link>
         <router-link :to="{name:''}">
           <li>Comments</li>

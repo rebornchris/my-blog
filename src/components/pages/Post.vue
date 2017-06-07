@@ -6,7 +6,7 @@
           <a href="#">{{titleItem.title}}</a>
         </h2>
         <div class="post-meta">
-          时间：{{frontFormatDate(titleItem.createTime)}}
+          时间：{{formatDate(titleItem.createTime)}}
         </div>
         <div class="post-content">
           <p v-html='compiledMarkdown(titleItem.content)'></p>
@@ -23,6 +23,7 @@
 import axios from 'axios'
 import Marked from 'marked'
 import Slider from '../common/slider.vue'
+import Tools from '../../config/tools'
 export default {
   components: {
     Slider
@@ -49,12 +50,8 @@ export default {
       this.content = contentd
       return Marked(this.content, { sanitize: true })
     },
-    frontFormatDate (t) {
-      let date = new Date(t)
-      let year = date.getFullYear()
-      let month = date.getMonth() + 1
-      let day = date.getDate()
-      return `${year}-${month < 10 ? 0 : ''}${month}-${day < 10 ? 0 : ''}${day}`
+    formatDate (time) {
+      return Tools.frontFormatDate(time)
     }
   }
 }

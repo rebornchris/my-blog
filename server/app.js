@@ -54,7 +54,6 @@ const userModel = db.model('user', userSchema)
 
 app.post('/back/saveArticle', function(req, res) {
   let { title, content, createTime, tags } = req.body;
-  console.log(title)
   articleModel.create({
     title,
     content,
@@ -70,6 +69,47 @@ app.post('/back/saveArticle', function(req, res) {
 app.get('/getArticles', function(req, res) {
   articleModel.find().sort({createTime: -1}).then(articles => {
     res.send(articles);
+  }).catch(_ => {
+    res.sendStatus(500);
+  });
+});
+
+app.get('/back/getArticlesInfo', function(req, res) {
+  articleModel.find({}, {title: 1, createTime: 1 }).sort({createTime: -1}).then(articlesInfo => {
+    res.send(articlesInfo);
+  }).catch(_ => {
+    res.sendStatus(500);
+  });
+});
+
+app.get('/back/deleteArticle', function(req, res) {
+  articleModel.findByIdAndRemove(req.query.id).then(delArticle => {
+    res.send(delArticle);
+  }).catch(_ => {
+    res.sendStatus(500);
+  });
+});
+
+app.get('/back/getArticle', function(req, res) {
+  articleModel.findById(req.query.id).then(articles => {
+    res.send(articles);
+  }).catch(_=> {
+    res.sendStatus(500);
+  });
+});
+
+app.post('/back/changeArticle', function(req, res) {
+  let { id, title, content, createTime, tags } = req.body;
+
+  articleModel.findByIdAndUpdate(id, {
+    title,
+    content,
+    createTime,
+    tags
+  }, {
+    'new': true  // 返回的为新数据
+  }).then(newArticle => {
+    res.send(newArticle);
   }).catch(_ => {
     res.sendStatus(500);
   });

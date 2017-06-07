@@ -5,6 +5,8 @@ import Post from '../components/pages/Post'
 import Tags from '../components/pages/Tags'
 import Project from '../components/pages/Project'
 import createArticle from '../components/server/CreateArticle'
+import viewArticles from '../components/server/ViewArticles.vue'
+import changeArticle from '../components/server/ChangeArticle.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -29,16 +31,26 @@ export default new Router({
       name: 'Project',
       component: Project
     },
-    // {
-    //   path: '/back',
-    //   redirect: {
-    //     name: 'createArticle'
-    //   }
-    // },
+    {
+      path: '/back',
+      redirect: {
+        name: 'viewArticles'
+      }
+    },
     {
       path: '/back/createArticle',
       name: 'createArticle',
       component: createArticle
+    },
+    {
+      path: '/back/viewArticles',
+      name: 'viewArticles',
+      component: viewArticles
+    },
+    {
+      path: '/back/changeArticle',
+      name: 'changeArticle',
+      component: changeArticle
     }
   ]
 })
