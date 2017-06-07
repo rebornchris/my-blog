@@ -6,8 +6,10 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import VueSimplemde from 'vue-simplemde'
-Vue.config.productionTip = false
+import axios from 'axios'
 
+Vue.config.productionTip = false
+axios.default.withCredentials = true
 Vue.use(ElementUI)
 Vue.use(VueSimplemde)
 /* eslint-disable no-new */

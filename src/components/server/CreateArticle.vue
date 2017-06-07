@@ -4,23 +4,23 @@
       <div class="edit-meta">
         <div class="filed-item">
           <p>文章标题</p>
-          <input type="text" name="title" placeholder="请输入文章标题" autocomplete="off">
+          <input type="text" name="title" placeholder="请输入文章标题" autocomplete="off" v-model='title'>
         </div>
         <div class="filed-item">
           <p>创建时间</p>
-          <input type="date" name="time" placeholder="请输入文章创建时间" autocomplete="off">
+          <input type="date" name="time" placeholder="请输入文章创建时间(格式为yyyy-mm-dd)" autocomplete="off" v-model='createTime'>
         </div>
         <div class="filed-item">
           <p>文章标签</p>
-          <input type="text" name="title" placeholder="请输入文章标签" autocomplete="off">
+          <input type="text" name="title" placeholder="请输入文章标签" autocomplete="off" v-model='tags'>
         </div>
       </div>
       <div class="markdown-editor">
         <markdown-editor v-model="content" ref="markdownEditor"></markdown-editor>
       </div>
       <div class="button-group">
-        <button type="button" name="submit">初始化</button>
-        <button type="button" name="submit"></button>
+        <button type="button" name="submit" @click='init'>初始化</button>
+        <button type="button" name="submit" @click='post'>提交</button>
       </div>
     </div>
     <div class="preview">
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { markdownEditor } from 'vue-simplemde'
 import Marked from 'marked'
 
@@ -40,12 +41,35 @@ export default {
   },
   data () {
     return {
-      content: ''
+      content: '',
+      createTime: '',
+      tags: '',
+      title: ''
     }
   },
   computed: {
     compiledMarkdown: function () {
       return Marked(this.content, { sanitize: true })
+    }
+  },
+  methods: {
+    init () {
+      this.content = ''
+      this.createTime = ''
+      this.title = ''
+      this.tags = ''
+    },
+
+    post () {
+      if (this.title === '' || this.content === '' || this.createTime === '' || this.tags === '') return
+      axios.post('http://localhost:3000/back/saveArticle', {
+        title: this.title,
+        createTime: new Date(this.createTime).getTime(),
+        tags: this.tags.split('|'),
+        content: this.content
+      }).then(response => {
+        this.$router.push({name: 'Post'})
+      })
     }
   }
 }
