@@ -1,17 +1,15 @@
 <template lang="html">
   <div class="post-list">
     <div class="content-container">
-      <div class="main-content" v-for="titleItem in titleList" :key="titleItem._id">
+      <div class="main-content">
         <h2 class="post-title">
-          <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
-              <span class="read-btn">{{titleItem.title}}</span>
-            </router-link>
+          <a href="#">{{article.title}}</a>
         </h2>
         <div class="post-meta">
-          {{formatDate(titleItem.createTime)}}
+          {{formatDate(article.createTime)}}
         </div>
         <div class="post-content">
-          <p v-html='compiledMarkdown(titleItem.content)'></p>
+          <div id="wrap" v-html='article.content'></div>
         </div>
       </div>
     </div>
@@ -26,32 +24,37 @@ import axios from 'axios'
 import Marked from 'marked'
 import Slider from '../common/slider.vue'
 import Tools from '../../config/tools'
+import hljs from 'highlight.js'
+require('highlight.js/styles/atom-one-dark.css')
+require('../../css/markdown.css')
+Marked.setOptions({
+  highlight: function (code, lang, callback) {
+    return hljs.highlightAuto(code).value
+  }
+})
 export default {
   components: {
     Slider
   },
   created () {
-    this.getAllTitle()
+    this.getArticleById()
   },
   data () {
     return {
-      titleList: [],
+      article: {},
       content: ''
     }
   },
   methods: {
-    getAllTitle () {
-      axios.get('http://localhost:3000/getArticles').then(response => {
-        // if (response.data.length > 3) {
-        //   response.data.splice(0, response.data.length - 3)
-        // }
-        this.titleList = response.data
-        console.log(this.titleList)
+    getArticleById () {
+      axios.get(`http://localhost:3000/getArticle`, {
+        params: {
+          id: this.$route.params.id
+        }
+      }).then(res => {
+        res.data.content = Marked(res.data.content)
+        this.article = res.data
       })
-    },
-    compiledMarkdown (contentd) {
-      this.content = contentd
-      return Marked(this.content, { sanitize: true })
     },
     formatDate (time) {
       let temp = Tools.frontFormatDate(time)
@@ -80,10 +83,6 @@ export default {
       .main-content{
         margin-bottom: 50px;
         padding: 20px 50px 15px 0;
-
-        &:nth-child(1){
-          border-right: 1px solid #ddd;
-        }
         .post-title{
           text-align: left;
           font-size: 25px;
@@ -108,11 +107,8 @@ export default {
         .post-content{
           font-size: 15px;
           line-height: 2;
-          height: 500px;
-          text-overflow: ellipsis;
           color: #333;
           padding-top: 23px;
-          overflow: hidden;
           text-align: justify;
       }
     }

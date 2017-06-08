@@ -115,6 +115,14 @@ app.post('/back/changeArticle', function(req, res) {
   });
 });
 
+app.get('/getArticle', function(req, res) {
+  articleModel.findById(req.query.id).then(article => {
+    res.send(article);
+  }).catch(_ => {
+    res.sendStatus(500);
+  })
+});
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 })
