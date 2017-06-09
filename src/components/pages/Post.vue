@@ -13,6 +13,9 @@
         <div class="post-content">
           <p v-html='compiledMarkdown(titleItem.content)'></p>
         </div>
+        <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
+            <p class="read-more">Read More...</p>
+          </router-link>
       </div>
     </div>
     <div class="">
@@ -46,7 +49,6 @@ export default {
         //   response.data.splice(0, response.data.length - 3)
         // }
         this.titleList = response.data
-        console.log(this.titleList)
       })
     },
     compiledMarkdown (contentd) {
@@ -61,7 +63,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .post-list{
     width: 100%;
     margin: 0 auto;
@@ -80,10 +82,7 @@ export default {
       .main-content{
         margin-bottom: 50px;
         padding: 20px 50px 15px 0;
-
-        &:nth-child(1){
-          border-right: 1px solid #ddd;
-        }
+        border-bottom: 1px solid #ddd;
         .post-title{
           text-align: left;
           font-size: 25px;
@@ -114,6 +113,18 @@ export default {
           padding-top: 23px;
           overflow: hidden;
           text-align: justify;
+      }
+
+      a{
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .read-more{
+        display: flex;
+        align-self: flex-start;
+        margin-top: 35px;
+        color: #999;
       }
     }
   }

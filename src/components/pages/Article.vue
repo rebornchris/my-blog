@@ -3,13 +3,13 @@
     <div class="content-container">
       <div class="main-content">
         <h2 class="post-title">
-          <a href="#">{{article.title}}</a>
+          {{article.title}}
         </h2>
         <div class="post-meta">
           {{formatDate(article.createTime)}}
         </div>
         <div class="post-content">
-          <div id="wrap" v-html='article.content'></div>
+          <div v-html='article.content'></div>
         </div>
       </div>
     </div>
@@ -24,14 +24,7 @@ import axios from 'axios'
 import Marked from 'marked'
 import Slider from '../common/slider.vue'
 import Tools from '../../config/tools'
-import hljs from 'highlight.js'
-require('highlight.js/styles/atom-one-dark.css')
-require('../../css/markdown.css')
-Marked.setOptions({
-  highlight: function (code, lang, callback) {
-    return hljs.highlightAuto(code).value
-  }
-})
+
 export default {
   components: {
     Slider
@@ -109,6 +102,7 @@ export default {
           line-height: 2;
           color: #333;
           padding-top: 23px;
+          height: 100%;
           text-align: justify;
       }
     }

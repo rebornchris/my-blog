@@ -43,6 +43,8 @@ export default {
   display: flex;
   flex-direction: column;
   width: 300px;
+  border-left: 1px solid #ddd;
+
   .search{
     padding-left: 35px;
 

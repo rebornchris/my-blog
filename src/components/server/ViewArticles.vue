@@ -16,7 +16,7 @@
               <td>{{ article.title }}</td>
               <td>{{ formatDate(article.createTime) }}</td>
               <td>
-                <router-link :to="{ name: ''}">
+                <router-link :to="{ name: 'Article', params: { id: article._id }}">
                   <button type="button" name="button" class="btn view-btn">查看</button>
                 </router-link>
                 <router-link :to="{ name: 'changeArticle', params: { id: article._id } }">

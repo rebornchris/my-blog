@@ -32,6 +32,7 @@ module.exports = {
         loader: 'eslint-loader',
         enforce: 'pre',
         include: [resolve('src'), resolve('test')],
+        exclude: /node_modules/,
         options: {
           formatter: require('eslint-friendly-formatter')
         }
@@ -48,6 +49,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        exclude: /node_modules/,
         include: [resolve('src'), resolve('test')]
       },
       {
