@@ -13,9 +13,14 @@
         <div class="post-content">
           <p v-html='compiledMarkdown(titleItem.content)'></p>
         </div>
-        <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
+        <div class="meta-info">
+          <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
             <p class="read-more">Read More...</p>
           </router-link>
+          <router-link :to="{ name: '' }">
+            <p class="tags-meta">#{{titleItem.tags[0]}}</p>
+          </router-link>
+        </div>
       </div>
     </div>
     <div class="">
@@ -115,16 +120,11 @@ export default {
           text-align: justify;
       }
 
-      a{
-        text-decoration: none;
-        color: inherit;
-      }
-
-      .read-more{
+      .meta-info{
         display: flex;
-        align-self: flex-start;
+        flex-direction: row;
         margin-top: 35px;
-        color: #999;
+        justify-content: space-between;
       }
     }
   }

@@ -1,10 +1,12 @@
 <template lang="html">
   <div class='nav-container'>
     <nav class="nav-top">
-      <a href="#" class="nav-logo">
+      <div class="nav-logo">
         <img src="../../assets/logo.jpeg" alt="" class="logo">
-        <span class="brand">RebornChris</span>
-      </a>
+        <router-link :to="{name:'Post'}">
+          <span class="brand">RebornChris</span>
+        </router-link>
+      </div>
       <ul class="nav-list" v-if="$route.path.indexOf('/back') === -1">
         <router-link :to="{name:'Post'}">
           <li :class="{ cur: $route.name === 'Post' }">Articles</li>
