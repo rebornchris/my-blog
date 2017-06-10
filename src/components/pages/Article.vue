@@ -32,6 +32,9 @@ export default {
   created () {
     this.getArticleById()
   },
+  watch: {
+    '$route': 'getArticleById'
+  },
   data () {
     return {
       article: {},

@@ -13,26 +13,41 @@
         Recent
       </div>
       <ul>
-        <li>第一篇第一篇第一篇第一篇第一篇第一篇第一篇第一篇第一篇第一篇第一篇第一篇第一篇</li>
-        <li>第二篇</li>
-        <li>第三篇</li>
-        <li>第四篇</li>
-        <li>第五篇</li>
+        <li v-for='item in sliderTitle' :key='item._id'>
+          <router-link :to="{ name: 'Article', params: { id: item._id }}">
+            <p>{{item.title}}</p>
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
-      input2: ''
+      input2: '',
+      sliderTitle: []
     }
+  },
+  created () {
+    this.getAllTitle()
   },
   methods: {
     handleIconClick () {
       console.log(this.input2)
+      console.log(this.sliderTitle)
+    },
+    getAllTitle () {
+      axios.get('http://localhost:3000/getArticles').then(response => {
+        console.log(response.data)
+        // if (response.data.length > 3) {
+        //   response.data.splice(0, response.data.length - 3)
+        // }
+        this.sliderTitle = response.data
+      })
     }
   }
 }

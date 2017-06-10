@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="post-list">
     <div class="content-container">
-      <div class="main-content" v-for="titleItem in titleList" :key="titleItem._id">
+      <div class="main-content" v-for="titleItem in titleList" :key='titleItem._id'>
         <h2 class="post-title">
           <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
-              <span class="read-btn">{{titleItem.title}}</span>
-            </router-link>
+            <span class="read-btn">{{titleItem.title}}</span>
+          </router-link>
         </h2>
         <div class="post-meta">
           {{formatDate(titleItem.createTime)}}
@@ -54,6 +54,7 @@ export default {
         //   response.data.splice(0, response.data.length - 3)
         // }
         this.titleList = response.data
+        console.log(this.titleList)
       })
     },
     compiledMarkdown (contentd) {
