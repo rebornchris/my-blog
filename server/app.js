@@ -24,6 +24,8 @@ app.all('*',function (req, res, next) {
   }
 })
 
+const cert = 'rebornchris';
+
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 // 连接mongodb
@@ -64,6 +66,21 @@ app.post('/back/saveArticle', function(req, res) {
   }).catch(_ => {
     res.sendStatus(500);
   });
+});
+
+
+app.post('/saveUser', function(req, res) {
+  let { username, password } = req.body;
+  console.log(password)
+
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(password, salt, function(err, passwordHash) {
+      userModel.create({ username, passwordHash }, function(err) {
+        res.sendStatus(200);
+      })
+    });
+  });
+
 });
 
 app.get('/getArticles', function(req, res) {
@@ -121,6 +138,24 @@ app.get('/getArticle', function(req, res) {
   }).catch(_ => {
     res.sendStatus(500);
   })
+});
+
+app.post('/back/login', function(req, res) {
+  let { username, password } = req.body;
+
+  userModel.findOne({username: username}).then(user => {
+    bcrypt.compare(password, user.passwordHash, function(err, result) {
+      if(err || !result) {
+        res.send('password incorrect');
+      } else {
+        let token = jwt.sign({ id: user._id }, cert);
+        res.cookie('token', token, { maxAge: 60 * 60 * 24 * 7 * 1000 });
+        res.sendStatus(200);
+      }
+    });
+  }).catch(err => {
+    res.send('no such user');
+  });
 });
 
 app.listen(3000, function () {

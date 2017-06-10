@@ -8,6 +8,7 @@ import Article from '../components/pages/Article.vue'
 import createArticle from '../components/server/CreateArticle'
 import viewArticles from '../components/server/ViewArticles.vue'
 import changeArticle from '../components/server/ChangeArticle.vue'
+import Login from '../components/server/login.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -43,6 +44,11 @@ export default new Router({
       redirect: {
         name: 'viewArticles'
       }
+    },
+    {
+      path: '/back/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/back/createArticle',
