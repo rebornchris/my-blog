@@ -2,6 +2,7 @@
   <div class="tags-list">
     <div class="something">
       <span>这个是归档</span>
+      <span>日期：</span>
     </div>
     <div class="slider">
       <Slider></Slider>
