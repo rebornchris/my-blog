@@ -36,6 +36,7 @@ body {
 ul, li {
     margin: 0;
     padding: 0;
+    list-style-type: none;
 }
 a{
   text-decoration: none;

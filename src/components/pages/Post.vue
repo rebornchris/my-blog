@@ -87,7 +87,7 @@ export default {
 
       .main-content{
         margin-bottom: 50px;
-        padding: 20px 50px 15px 0;
+        padding: 0px 50px 15px 0;
         border-bottom: 1px solid #ddd;
         .post-title{
           text-align: left;

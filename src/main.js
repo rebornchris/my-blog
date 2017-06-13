@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import VueSimplemde from 'vue-simplemde'
 import axios from 'axios'
+import 'vue-awesome/icons'
 
 Vue.config.productionTip = false
 axios.default.withCredentials = true
