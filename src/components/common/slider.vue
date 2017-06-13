@@ -42,10 +42,6 @@ export default {
     },
     getAllTitle () {
       axios.get('http://localhost:3000/getArticles').then(response => {
-        console.log(response.data)
-        // if (response.data.length > 3) {
-        //   response.data.splice(0, response.data.length - 3)
-        // }
         this.sliderTitle = response.data
       })
     }
