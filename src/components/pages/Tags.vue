@@ -4,61 +4,46 @@
       <div class="tags-show">
         <span>标签</span>
         <ul>
-          <li>游戏</li>
-          <li>生活</li>
-          <li>其他</li>
-          <li>游戏</li>
-          <li>生活</li>
-          <li>其他</li>
-          <li>游戏</li>
+          <li>#全部</li>
+          <li @click='getArticlesByTag(tag)' v-for='tag in tags'>#{{ tag }}</li>
         </ul>
       </div>
       <div class="tags-title">
         <span @click='change'>
-          <span @click='flag=false' :class="{ cur: flag }">归档</span>
+          <span @click.stop.prevent='flag=false' :class="{ cur: !flag }">归档</span>
           <span>|</span>
-          <span @click='flag=true' :class="{ cur: !flag }">时间线</span>
+          <span @click.stop.prevent='flag=true' :class="{ cur: flag }">时间线</span>
         </span>
-        <div class="tags-articles" v-if='flag'>
-          <div class="tags-icons">
-            <span>
-              <icon name='tags'></icon>
-              <span>游戏</span>
+        <transition-group name="list" mode='out-in'>
+          <div class="tags-articles" v-if='!flag' v-for='article in articlesList' :key='article'>
+            <div class="tags-icons">
+              <span>
+                <icon name='tags'></icon>
+                <span>{{ article.tags }}</span>
+              </span>
+            </div>
+            <span class="articles-title">
+              <router-link :to="{ name: 'Article', params: { id: article._id }}">
+                {{ article.title }}
+              </router-link>
             </span>
           </div>
-          <span class="articles-title">关东煮店人情顾问世界</span>
-          <span class="articles-title">高德置地弟弟的标签</span>
-        </div>
-        <div class="tags-articles" v-if='!flag'>
-          <div class="tags-icons">
-            <span>
-              <icon name='calendar-times-o'></icon>
-              <span>2017年6月</span>
+        </transition-group>
+        <transition-group name="list" mode='out-in'>
+          <div class="tags-articles" v-if='flag' v-for='temps in timeline' :key='temps'>
+            <div class="tags-icons">
+              <span>
+                <icon name='calendar-times-o'></icon>
+                <span>{{ temps[0].year }}年{{ temps[0].month }}月</span>
+              </span>
+            </div>
+            <span class="articles-title" v-for='temp in temps' :key="temp._id">
+              <router-link :to="{ name: 'Article', params: { id: temp._id }}">
+                {{ temp.title }}
+              </router-link>
             </span>
           </div>
-          <span class="articles-title">关东煮店人情顾问世界231</span>
-          <span class="articles-title">高德置地弟弟的标签312</span>
-        </div>
-        <div class="tags-articles" v-if='!flag'>
-          <div class="tags-icons">
-            <span>
-              <icon name='calendar-times-o'></icon>
-              <span>2017年6月</span>
-            </span>
-          </div>
-          <span class="articles-title">关东煮店人情顾问世界231</span>
-          <span class="articles-title">高德置地弟弟的标签312</span>
-        </div>
-        <div class="tags-articles" v-if='!flag'>
-          <div class="tags-icons">
-            <span>
-              <icon name='calendar-times-o'></icon>
-              <span>2017年6月</span>
-            </span>
-          </div>
-          <span class="articles-title">关东煮店人情顾问世界231</span>
-          <span class="articles-title">高德置地弟弟的标签312</span>
-        </div>
+        </transition-group>
       </div>
     </div>
     <div class="slider">
@@ -76,7 +61,11 @@ export default {
     return {
       flag: true,
       articlesList: [],
-      tags: []
+      tags: [],
+      timeline: [],
+      selected: '',
+      newsd: [],
+      newsb: []
     }
   },
   components: {
@@ -85,6 +74,7 @@ export default {
   },
   created () {
     this.getAllTitle()
+    this.getTagsArticles()
   },
   methods: {
     change () {
@@ -93,16 +83,75 @@ export default {
     getAllTitle () {
       axios.get('http://localhost:3000/getArticles').then(response => {
         this.articlesList = response.data
+        let items = []
+        let flag = {}
+        let oldTags = []
         for (let i = 0; i < this.articlesList.length; i++) {
-          this.tags.push(this.articlesList[i].tags[0])
+          oldTags.push(this.articlesList[i].tags)
+          let tempDate = new Date(this.articlesList[i].createTime)
+          let year = tempDate.getFullYear()
+          let month = tempDate.getMonth() + 1
+
+          if (flag[year + '' + month] === undefined) {
+            flag[year + '' + month] = items.length
+            items[flag[year + '' + month]] = []
+          }
+          this.articlesList[i].year = year
+          this.articlesList[i].month = month
+          items[flag[year + '' + month]].push(this.articlesList[i])
         }
+        this.tags = Array.from(new Set(oldTags))
+        this.timeline = items
+        this.tags.map(tag => {
+          axios.get('http://localhost:3000/getArticlesByTag', {
+            params: {
+              tag: tag
+            }
+          }).then(response => {
+            this.newsb.push(response.data)
+          })
+        })
       })
+      console.log(this.selected)
+    },
+    selectTags (tag) {
+      this.selected = tag
+      this.flag = false
+    },
+    getArticlesByTag (tag) {
+      axios.get('http://localhost:3000/getArticlesByTag', {
+        params: {
+          tag: tag
+        }
+      }).then(response => {
+        this.newsd = response.data
+      })
+    },
+    getTagsArticles () {
+      this.tags.map(tag => {
+        console.log(tag)
+        axios.get('http://localhost:3000/getArticlesByTag', {
+          params: {
+            tag: tag
+          }
+        }).then(response => {
+          this.newsb.push(response.data)
+        })
+      })
+    //  console.log(this.newsb + '123')
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.list-enter-active, .list-leave-active {
+  transition: all .7s ease;
+}
+.list-enter, .list-leave-active {
+  opacity: 0;
+  transform: translateX(30px);
+}
 .tags-container{
   width: 100%;
   padding-left: 250px;
@@ -168,7 +217,7 @@ export default {
       align-items: flex-start;
       margin-top: 35px;
       .tags-articles{
-        width: 100%;
+        width: 651px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;

@@ -65,7 +65,7 @@ export default {
       axios.post('http://localhost:3000/back/saveArticle', {
         title: this.title,
         createTime: new Date(this.createTime).getTime(),
-        tags: this.tags.split('|'),
+        tags: this.tags,
         content: this.content
       }).then(response => {
         this.$router.push({name: 'Post'})

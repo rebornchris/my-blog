@@ -15,7 +15,7 @@
       <ul>
         <li v-for='item in sliderTitle' :key='item._id'>
           <router-link :to="{ name: 'Article', params: { id: item._id }}">
-            <p>{{item.title}}</p>
+            <span>{{item.title}}</span>
           </router-link>
         </li>
       </ul>

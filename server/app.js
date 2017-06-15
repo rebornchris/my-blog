@@ -41,7 +41,7 @@ const articleSchema = new mongoose.Schema({
     title: String,
     content: String,
     createTime: Number,
-    tags: [String],
+    tags: String,
     comments: []
 })
 
@@ -155,6 +155,22 @@ app.post('/back/login', function(req, res) {
     });
   }).catch(err => {
     res.send('no such user');
+  });
+});
+
+app.get('/getArticlesByTag', function(req, res) {
+  articleModel.find({tags: req.query.tag}).sort({createTime: -1}).exec().then(articles => {
+    res.send(articles);
+  }).catch(_ => {
+    res.sendStatus(500);
+  });
+});
+
+app.get('/getAllTags', function(req, res) {
+  articleModel.find().distinct('tags').exec().then(tags => {
+    res.send(tags);
+  }).catch(_ => {
+    res.sendStatus(500);
   });
 });
 

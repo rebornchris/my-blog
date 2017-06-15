@@ -18,7 +18,7 @@
             <p class="read-more">Read More...</p>
           </router-link>
           <router-link :to="{ name: '' }">
-            <p class="tags-meta">#{{titleItem.tags[0]}}</p>
+            <p class="tags-meta">#{{titleItem.tags}}</p>
           </router-link>
         </div>
       </div>
@@ -113,7 +113,7 @@ export default {
         .post-content{
           font-size: 15px;
           line-height: 2;
-          height: 500px;
+          height: 550px;
           text-overflow: ellipsis;
           color: #333;
           padding-top: 23px;
