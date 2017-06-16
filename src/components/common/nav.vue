@@ -14,9 +14,9 @@
         <router-link :to="{name:'Tags'}">
           <li :class="{ cur: $route.name === 'Tags' }">Tags</li>
         </router-link>
-        <router-link :to="{name:'Project'}">
-          <li :class="{ cur: $route.name === 'Project' }">Things</li>
-        </router-link>
+        <a href="http://rebornchris.com/vue-cnode" target="_blank">
+          <li>Things</li>
+        </a>
         <router-link :to="{name:'Me'}">
           <li :class="{ cur: $route.name === 'Me' }">Me</li>
         </router-link>

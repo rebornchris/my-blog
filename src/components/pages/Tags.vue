@@ -5,7 +5,7 @@
         <span>标签</span>
         <ul>
           <li>#全部</li>
-          <li @click='getArticlesByTag(tag)' v-for='tag in tags'>#{{ tag }}</li>
+          <li v-for='tag in tags'>#{{ tag }}</li>
         </ul>
       </div>
       <div class="tags-title">
@@ -15,16 +15,16 @@
           <span @click.stop.prevent='flag=true' :class="{ cur: flag }">时间线</span>
         </span>
         <transition-group name="list" mode='out-in'>
-          <div class="tags-articles" v-if='!flag' v-for='article in articlesList' :key='article'>
+          <div class="tags-articles" v-if='!flag' v-for='article in ArticlsByTags' :key='article'>
             <div class="tags-icons">
               <span>
                 <icon name='tags'></icon>
-                <span>{{ article.tags }}</span>
+                <span>{{ article[0].tags }}</span>
               </span>
             </div>
-            <span class="articles-title">
-              <router-link :to="{ name: 'Article', params: { id: article._id }}">
-                {{ article.title }}
+            <span class="articles-title" v-for='title in article'>
+              <router-link :to="{ name: 'Article', params: { id: title._id }}">
+                {{ title.title }}
               </router-link>
             </span>
           </div>
@@ -65,7 +65,7 @@ export default {
       timeline: [],
       selected: '',
       newsd: [],
-      newsb: []
+      ArticlsByTags: []
     }
   },
   components: {
@@ -74,7 +74,6 @@ export default {
   },
   created () {
     this.getAllTitle()
-    this.getTagsArticles()
   },
   methods: {
     change () {
@@ -102,43 +101,23 @@ export default {
         }
         this.tags = Array.from(new Set(oldTags))
         this.timeline = items
-        this.tags.map(tag => {
-          axios.get('http://localhost:3000/getArticlesByTag', {
-            params: {
-              tag: tag
-            }
-          }).then(response => {
-            this.newsb.push(response.data)
-          })
-        })
+        this.getTagsArticles(this.tags)
       })
-      console.log(this.selected)
     },
     selectTags (tag) {
       this.selected = tag
       this.flag = false
     },
-    getArticlesByTag (tag) {
-      axios.get('http://localhost:3000/getArticlesByTag', {
-        params: {
-          tag: tag
-        }
-      }).then(response => {
-        this.newsd = response.data
-      })
-    },
-    getTagsArticles () {
-      this.tags.map(tag => {
-        console.log(tag)
+    getTagsArticles (arr) {
+      arr.map(tag => {
         axios.get('http://localhost:3000/getArticlesByTag', {
           params: {
             tag: tag
           }
         }).then(response => {
-          this.newsb.push(response.data)
+          this.ArticlsByTags.push(response.data)
         })
       })
-    //  console.log(this.newsb + '123')
     }
   }
 }
@@ -201,8 +180,6 @@ export default {
           font-weight: 200;
           color: #fff;
           background-color: #d3d3d3;
-          cursor: pointer;
-
           &:hover{
             background-color: #0085a1;
           }

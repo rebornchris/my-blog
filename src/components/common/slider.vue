@@ -1,12 +1,10 @@
 <template lang="html">
   <div class="slide-bar">
-    <div class="search">
-      <el-input
-        placeholder="Search"
-        icon="search"
-        v-model="input2"
-        :on-icon-click="handleIconClick">
-      </el-input>
+    <div class="icons">
+      <a href="https://github.com/rebornchris" target="_blank"><img width='35' height='35' src="../../assets/github.svg" alt=""></a>
+      <a href="http://weibo.com/u/2273667002?refer_flag=1001030201_&is_all=1" target="_blank"><img width='35' height='35' src="../../assets/weibo.svg" alt=""></a>
+      <a href="https://twitter.com/pure4chris" target="_blank"><img width='35' height='35' src="../../assets/twitter.svg" alt=""></a>
+      <a href="mailto:415817317@qq.com" target="_blank"><img width='35' height='35' src="../../assets/gmail.svg" alt=""></a>
     </div>
     <div class="recent">
       <div class="recent-title">
@@ -24,11 +22,11 @@
 </template>
 
 <script>
+
 import axios from 'axios'
 export default {
   data () {
     return {
-      input2: '',
       sliderTitle: []
     }
   },
@@ -36,13 +34,9 @@ export default {
     this.getAllTitle()
   },
   methods: {
-    handleIconClick () {
-      console.log(this.input2)
-      console.log(this.sliderTitle)
-    },
     getAllTitle () {
       axios.get('http://localhost:3000/getArticles').then(response => {
-        this.sliderTitle = response.data
+        this.sliderTitle = response.data.splice(0, 5)
       })
     }
   }
@@ -56,23 +50,16 @@ export default {
   width: 300px;
   border-left: 1px solid #ddd;
 
-  .search{
-    padding-left: 35px;
-
-    input{
-      padding: 8px 12px 8px 12px;
-      outline: none;
-      line-height: 1.5;
-      color: #666;
-      height: 40px;
-      width: 230px;
-
-    }
+  .icons{
+    margin-top: 5px;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-around;
   }
 
   .recent{
     width: 300px;
-    margin-top: 30px;
+    margin-top: 15px;
     height: 400px;
     padding-left: 20px;
     color: #6E7173;
