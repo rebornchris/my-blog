@@ -1,5 +1,6 @@
 <template lang="html">
-  <div class="post-list">
+  <div class="main-body">
+    <div class="post-list">
     <div class="content-container">
       <div class="main-content">
         <h2 class="post-title">
@@ -16,6 +17,7 @@
     <div class="">
       <Slider></Slider>
     </div>
+  </div>
   </div>
 </template>
 
@@ -61,10 +63,10 @@ export default {
 </script>
 
 <style lang="less">
+.main-body{
+  display: flex;
+  justify-content: center;
   .post-list{
-    width: 100%;
-    margin: 0 auto;
-    padding-left: 250px;
     padding-top: 50px;
     display: flex;
     justify-content: flex-start;
@@ -73,12 +75,12 @@ export default {
       display: flex;
       flex-direction: column;
       font: 'TIBch', 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB',
-                            'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
+      'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
       width: 850px;
 
       .main-content{
         margin-bottom: 50px;
-        padding: 20px 50px 15px 0;
+        padding: 0px 50px 15px 10px;
         .post-title{
           text-align: left;
           font-size: 25px;
@@ -107,6 +109,7 @@ export default {
           padding-top: 23px;
           height: 100%;
           text-align: justify;
+        }
       }
     }
   }

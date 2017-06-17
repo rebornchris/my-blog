@@ -51,21 +51,15 @@ export default {
     src: local('satisfy'), local('satisfy'), url(../../assets/satisfy.woff);
   }
 .nav-container{
-  /* position: absolute;
-  top: 0;
-  right: 0;
-  left: 0; */
   z-index: 100;
   background: #fff;
   box-shadow: 0 0 4px rgba(0,0,0,0.25);
 
   .nav-top{
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 80px;
+    height: 50px;
     padding: 25px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 
     .nav-logo{
       display: flex;

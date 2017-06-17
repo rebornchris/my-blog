@@ -1,30 +1,32 @@
 <template lang="html">
-  <div class="post-list">
-    <div class="content-container">
-      <div class="main-content" v-for="titleItem in titleList" :key='titleItem._id'>
-        <h2 class="post-title">
-          <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
-            <span class="read-btn">{{titleItem.title}}</span>
-          </router-link>
-        </h2>
-        <div class="post-meta">
-          {{formatDate(titleItem.createTime)}}
-        </div>
-        <div class="post-content">
-          <p v-html='compiledMarkdown(titleItem.content)'></p>
-        </div>
-        <div class="meta-info">
-          <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
-            <p class="read-more">Read More...</p>
-          </router-link>
-          <router-link :to="{ name: '' }">
-            <p class="tags-meta">#{{titleItem.tags}}</p>
-          </router-link>
+  <div class="main-container">
+    <div class="post-list">
+      <div class="content-container">
+        <div class="main-content" v-for="titleItem in titleList" :key='titleItem._id'>
+          <h2 class="post-title">
+            <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
+              <span class="read-btn">{{titleItem.title}}</span>
+            </router-link>
+          </h2>
+          <div class="post-meta">
+            {{formatDate(titleItem.createTime)}}
+          </div>
+          <div class="post-content">
+            <p v-html='compiledMarkdown(titleItem.content)'></p>
+          </div>
+          <div class="meta-info">
+            <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
+              <p class="read-more">Read More...</p>
+            </router-link>
+            <router-link :to="{ name: 'Tags' }">
+              <p class="tags-meta">#{{titleItem.tags}}</p>
+            </router-link>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="">
-      <Slider></Slider>
+      <div class="slider">
+        <Slider></Slider>
+      </div>
     </div>
   </div>
 </template>
@@ -70,62 +72,65 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .post-list{
-    width: 100%;
-    margin: 0 auto;
-    padding-left: 250px;
-    padding-top: 50px;
-    display: flex;
-    justify-content: flex-start;
-
-    .content-container{
+ .main-container{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+    .post-list{
+      width: 67%;
+      padding-top: 50px;
       display: flex;
-      flex-direction: column;
-      font: 'TIBch', 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB',
-                            'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
-      width: 850px;
+      justify-content: flex-start;
 
-      .main-content{
-        margin-bottom: 50px;
-        padding: 0px 50px 15px 0;
-        border-bottom: 1px solid #ddd;
-        .post-title{
-          text-align: left;
-          font-size: 25px;
-          font-weight: normal;
-          line-height: 1.4;
-          margin: 0;
-          a{
-            color: #666;
-            text-decoration: none;
-            cursor: pointer;
-          }
-        }
-        .post-meta{
-          padding: 0;
-          margin: 5px 0 0;
-          color: #999;
-          text-align: left;
-          display: block;
-          font-size: 14px;
-          /* text-indent:0.15em; */
-        }
-        .post-content{
-          font-size: 15px;
-          line-height: 2;
-          height: 550px;
-          text-overflow: ellipsis;
-          color: #333;
-          padding-top: 23px;
-          overflow: hidden;
-          text-align: justify;
-      }
-
-      .meta-info{
+      .content-container{
+        max-width: 850px;
         display: flex;
-        flex-direction: row;
-        margin-top: 35px;
-        justify-content: space-between;
+        flex-direction: column;
+        font: 'TIBch', 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB',
+                              'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
+
+        .main-content{
+          margin-bottom: 50px;
+          padding: 0px 50px 15px 0;
+          border-bottom: 1px solid #ddd;
+          .post-title{
+            text-align: left;
+            font-size: 25px;
+            font-weight: normal;
+            line-height: 1.4;
+            margin: 0;
+            a{
+              color: #666;
+              text-decoration: none;
+              cursor: pointer;
+            }
+          }
+          .post-meta{
+            padding: 0;
+            margin: 5px 0 0;
+            color: #999;
+            text-align: left;
+            display: block;
+            font-size: 14px;
+            /* text-indent:0.15em; */
+          }
+          .post-content{
+            font-size: 15px;
+            line-height: 2;
+            height: 550px;
+            text-overflow: ellipsis;
+            color: #333;
+            padding-top: 23px;
+            overflow: hidden;
+            text-align: justify;
+        }
+
+        .meta-info{
+          display: flex;
+          flex-direction: row;
+          margin-top: 35px;
+          justify-content: space-between;
+        }
       }
     }
   }
