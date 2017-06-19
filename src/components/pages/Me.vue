@@ -1,7 +1,7 @@
 <template lang="html">
-    <div class="">
-      <h2>this is me</h2>
-    </div>
+  <div class="Me-container">
+    
+  </div>
 </template>
 
 <script>
@@ -9,5 +9,10 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="less" scoped>
+.Me-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
