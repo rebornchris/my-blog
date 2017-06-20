@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="Me-container">
-    
+
   </div>
 </template>
 
@@ -10,9 +10,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.Me-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 </style>
