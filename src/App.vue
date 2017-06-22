@@ -31,6 +31,7 @@ body {
   min-width: 1200px;
   display: flex;
   flex-direction: column;
+  /* background-color: #f7f8fa; */
 }
 ul, li {
     margin: 0;

@@ -23,10 +23,9 @@
 
 <script>
 import axios from 'axios'
-import Marked from 'marked'
 import Slider from '../common/slider.vue'
 import Tools from '../../config/tools'
-
+import marked from '../../config/marked'
 export default {
   components: {
     Slider
@@ -50,7 +49,7 @@ export default {
           id: this.$route.params.id
         }
       }).then(res => {
-        res.data.content = Marked(res.data.content)
+        res.data.content = marked(res.data.content)
         this.article = res.data
       })
     },
@@ -74,8 +73,6 @@ export default {
     .content-container{
       display: flex;
       flex-direction: column;
-      font: 'TIBch', 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB',
-      'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
       width: 850px;
 
       .main-content{
@@ -108,7 +105,7 @@ export default {
           color: #333;
           padding-top: 23px;
           height: 100%;
-          text-align: justify;
+          text-align: left;
         }
       }
     }

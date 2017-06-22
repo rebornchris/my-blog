@@ -7,6 +7,12 @@
         <p>目前在寻找<strong>「靠谱」</strong>前端Team中</p>
       </div>
       <div class="detail">
+        <h3>一些声明</h3>
+        <blockquote>
+          <p>本站所有文章均为本人原创，仅代表个人在撰文时刻的观点和想法</p>
+        </blockquote>
+      </div>
+      <div class="detail">
         <h3>个人特点</h3>
         <blockquote>
           <p>喜欢一切美的东西，追求极致</p>
@@ -21,12 +27,6 @@
           <p>日常追生肉美剧</p>
           <p>十年Kobe死粉，现在转粉Warriors</p>
           <p>喜欢Dota，也玩得来王者荣耀，还想入手PS4</p>
-        </blockquote>
-      </div>
-      <div class="detail">
-        <h3>一些声明</h3>
-        <blockquote>
-          <p>本站所有文章均为本人原创，仅代表个人在撰文时刻的观点和想法</p>
         </blockquote>
       </div>
       <div class="detail">
