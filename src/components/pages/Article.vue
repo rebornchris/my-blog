@@ -10,7 +10,7 @@
           {{formatDate(article.createTime)}}
         </div>
         <div class="post-content">
-          <div v-html='article.content'></div>
+          <div class='markdown-body' v-html='article.content'></div>
         </div>
       </div>
     </div>
@@ -26,6 +26,7 @@ import axios from 'axios'
 import Slider from '../common/slider.vue'
 import Tools from '../../config/tools'
 import marked from '../../config/marked'
+require('../../css/markdown.css')
 export default {
   components: {
     Slider
@@ -106,6 +107,9 @@ export default {
           padding-top: 23px;
           height: 100%;
           text-align: left;
+
+          code{
+          }
         }
       }
     }

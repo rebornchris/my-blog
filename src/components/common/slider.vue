@@ -60,7 +60,7 @@ export default {
   .recent{
     width: 300px;
     margin-top: 15px;
-    height: 400px;
+    height: 300px;
     padding-left: 20px;
     color: #6E7173;
     font-family: sans-serif;
