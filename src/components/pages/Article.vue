@@ -64,9 +64,11 @@ export default {
 
 <style lang="less">
 .main-body{
+  width: 100%;
   display: flex;
   justify-content: center;
   .post-list{
+    width: 67%;
     padding-top: 50px;
     display: flex;
     justify-content: flex-start;
@@ -74,7 +76,7 @@ export default {
     .content-container{
       display: flex;
       flex-direction: column;
-      width: 850px;
+      width: 75%;
 
       .main-content{
         margin-bottom: 50px;

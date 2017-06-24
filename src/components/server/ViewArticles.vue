@@ -47,6 +47,9 @@ export default {
   methods: {
     getArticlesInfo () {
       axios.get('http://localhost:3000/back/getArticlesInfo').then(response => {
+        if (response.data === 'no login') {
+          this.$router.push({name: 'login'})
+        }
         this.articles = response.data
       })
     },

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="main-container">
     <div class="post-list">
       <div class="content-container">
@@ -78,9 +78,8 @@ export default {
       padding-top: 50px;
       display: flex;
       justify-content: flex-start;
-
       .content-container{
-        max-width: 850px;
+        width: 75%;
         display: flex;
         flex-direction: column;
         font: 'TIBch', 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB',
@@ -104,7 +103,7 @@ export default {
           }
           .post-meta{
             padding: 0;
-            margin: 5px 0 0;
+            margin: 10px 0 0;
             color: #999;
             text-align: left;
             display: block;

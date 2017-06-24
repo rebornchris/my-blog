@@ -46,7 +46,7 @@
           </transition-group>
         </div>
       </div>
-      <div class="slider">
+      <div class="">
         <Slider></Slider>
       </div>
     </div>
@@ -133,6 +133,7 @@ export default {
   transform: translateX(30px);
 }
 .tags-body{
+  width: 100%;
   display: flex;
   justify-content: center;
 
@@ -140,16 +141,15 @@ export default {
     width: 67%;
     padding-top: 50px;
     display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     .tags-view{
       font-family: 'TIBch', 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB',
                             'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
-      width: 850px;
+      width: 75%;
+      min-width: 504px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-right: 200px;
       span{
         cursor: pointer;
         font-size: 20px;
@@ -245,10 +245,6 @@ export default {
           }
         }
       }
-    }
-
-    .slider{
-      align-self: flex-start;
     }
   }
 }

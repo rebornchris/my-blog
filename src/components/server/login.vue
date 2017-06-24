@@ -8,6 +8,7 @@
         <div class="login-btn">
           <el-button type="success" @click='login'>登录</el-button>
           <el-button type="info" @click='reset'>重置</el-button>
+          <el-button type="info" @click='addUser'>注册</el-button>
         </div>
       </div>
     </div>
@@ -25,14 +26,14 @@ export default {
   },
   methods: {
 
-    // addUser () {
-    //   axios.post(`http://localhost:3000/saveUser`, {
-    //     username: this.username,
-    //     password: this.password
-    //   }).then(response => {
-    //     console.log(response)
-    //   })
-    // },
+    addUser () {
+      axios.post(`http://localhost:3000/saveUser`, {
+        username: this.username,
+        password: this.password
+      }).then(response => {
+        console.log(response)
+      })
+    },
 
     login () {
       if (this.username === '' || this.password === '') return
@@ -40,7 +41,7 @@ export default {
         username: this.username,
         password: this.password
       }).then(response => {
-        if (response.data === 'no such user' || response.data === 'password incorrect') {
+        if (response.data === 'no such user' || response.data === 'password incorrect' || response.data === 'no login') {
           this.$router.push({
             name: 'login'
           })
