@@ -32,7 +32,7 @@
 <script>
 import axios from 'axios'
 import { markdownEditor } from 'vue-simplemde'
-import Marked from 'marked'
+import Marked from '../../config/marked'
 
 export default {
   components: {
@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     compiledMarkdown: function () {
-      return Marked(this.content, { sanitize: true })
+      return Marked(this.content)
     }
   },
   methods: {
@@ -66,7 +66,7 @@ export default {
         title: this.title,
         createTime: new Date(this.createTime).getTime(),
         tags: this.tags,
-        content: this.content
+        content: Marked(this.content)
       }).then(response => {
         this.$router.push({name: 'Post'})
       })

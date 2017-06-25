@@ -12,7 +12,7 @@
             {{formatDate(titleItem.createTime)}}
           </div>
           <div class="post-content">
-            <div class='markdown-body' v-html='compiledMarkdown(titleItem.content)'></div>
+            <div class='markdown-body' v-html='titleItem.content'></div>
           </div>
           <div class="meta-info">
             <router-link :to="{ name: 'Article', params: { id: titleItem._id }}">
@@ -33,7 +33,6 @@
 
 <script>
 import axios from 'axios'
-import marked from '../../config/marked'
 import Slider from '../common/slider.vue'
 import Tools from '../../config/tools'
 require('../../css/markdown.css')
@@ -55,10 +54,6 @@ export default {
       axios.get('http://localhost:3000/getArticles').then(response => {
         this.titleList = response.data
       })
-    },
-    compiledMarkdown (contentd) {
-      this.content = contentd
-      return marked(this.content)
     },
     formatDate (time) {
       let temp = Tools.frontFormatDate(time)

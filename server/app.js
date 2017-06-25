@@ -54,24 +54,9 @@ const userSchema = new mongoose.Schema({
 const articleModel = db.model('article', articleSchema) // newClass为创建或选中的集合
 const userModel = db.model('user', userSchema)
 
-
-app.use('/back', function(req, res, next) {
-  let token = req.cookies.token;
-
-  if(token) {
-    let decodedToken = jwt.verify(token, cert);
-    userModel.findById(decodedToken.id).then(_ => {
-      next();
-    }).catch(_ => {
-      res.send('no login');
-    });
-  } else {
-    res.send('no login');
-  }
-});
-
 app.post('/back/saveArticle', function(req, res) {
   let { title, content, createTime, tags } = req.body;
+  console.log(content)
   articleModel.create({
     title,
     content,
@@ -87,7 +72,6 @@ app.post('/back/saveArticle', function(req, res) {
 
 app.post('/saveUser', function(req, res) {
   let { username, password } = req.body;
-  console.log(password)
 
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(password, salt, function(err, passwordHash) {
