@@ -1,7 +1,7 @@
 <template lang="html">
   <footer>
     <div class="footer-bar">
-      <p>Copyright (c) 2017 Copyright Holder All Rights Reserved.</p>
+        <span>© 2016 - <a href="https://github.com/rebornchris" target="_blank">RebornChris</a> | Powered by <a href="https://github.com/vuejs" target="_blank">Vue2</a></span>
     </div>
   </footer>
 </template>
@@ -13,10 +13,10 @@ export default {
 
 <style lang="less" scoped>
 .footer-bar{
-  height: 100px;
+  height: 60px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 </style>

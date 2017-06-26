@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="preview">
-      <p v-html='compiledMarkdown'></p>
+      <p v-html='this.content'></p>
     </div>
   </div>
 </template>
@@ -33,7 +33,6 @@
 import axios from 'axios'
 import { markdownEditor } from 'vue-simplemde'
 import Marked from '../../config/marked'
-
 export default {
   components: {
     markdownEditor,
@@ -45,11 +44,6 @@ export default {
       createTime: '',
       tags: '',
       title: ''
-    }
-  },
-  computed: {
-    compiledMarkdown: function () {
-      return Marked(this.content)
     }
   },
   methods: {

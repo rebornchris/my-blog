@@ -4,6 +4,7 @@
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
+    <footers></footers>
   </div>
 </template>
 
@@ -20,7 +21,7 @@ export default {
 
 <style>
 * {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 html, body {
   height: 100%;

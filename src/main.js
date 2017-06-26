@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
+import {Icon, Button, Input, MessageBox, Message} from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import VueSimplemde from 'vue-simplemde'
 import axios from 'axios'
@@ -11,7 +11,12 @@ import 'vue-awesome/icons'
 
 Vue.config.productionTip = false
 axios.default.withCredentials = true
-Vue.use(ElementUI)
+
+Vue.use(Icon)
+Vue.use(Button)
+Vue.use(Input)
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 Vue.use(VueSimplemde)
 /* eslint-disable no-new */
 new Vue({

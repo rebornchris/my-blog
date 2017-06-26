@@ -49,17 +49,33 @@ export default {
       axios.get('http://localhost:3000/back/getArticlesInfo').then(response => {
         if (response.data === 'no login') {
           this.$router.push({name: 'login'})
+          return
         }
         this.articles = response.data
       })
     },
     deleteArticle (id, index) {
-      axios.get('http://localhost:3000/back/deleteArticle', {
-        params: {
-          id
-        }
+      this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       }).then(() => {
-        this.articles.splice(index, 1)
+        axios.get('http://localhost:3000/back/deleteArticle', {
+          params: {
+            id
+          }
+        }).then(() => {
+          this.articles.splice(index, 1)
+        })
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     },
     formatDate (time) {

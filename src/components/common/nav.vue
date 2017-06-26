@@ -48,7 +48,7 @@ export default {
     font-family: 'satisfy';
     font-style: normal;
     font-weight: 400;
-    src: local('satisfy'), local('satisfy'), url(../../assets/satisfy.woff);
+    src: local('satisfy'), url(../../assets/satisfy.woff);
   }
 .nav-container{
   z-index: 100;

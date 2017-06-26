@@ -52,8 +52,9 @@ export default {
 
   .icons{
     margin-top: 5px;
+    margin-left: 15px;
     display: inline-flex;
-    width: 100%;
+    width: 90%;
     justify-content: space-around;
   }
 

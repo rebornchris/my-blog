@@ -7,6 +7,15 @@ let session = require('express-session')
 let bcrypt = require('bcrypt')
 let jwt = require('jsonwebtoken')
 
+app.use('/static', express.static('../dist/static'));
+// app.set('trust proxy', 1); // trust first proxy
+app.use(session({
+  secret: 'awesome',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -56,7 +65,6 @@ const userModel = db.model('user', userSchema)
 
 app.post('/back/saveArticle', function(req, res) {
   let { title, content, createTime, tags } = req.body;
-  console.log(content)
   articleModel.create({
     title,
     content,
@@ -69,6 +77,9 @@ app.post('/back/saveArticle', function(req, res) {
   });
 });
 
+app.get('/', function(req, res) {
+  res.sendFile(path.resolve('../dist/index.html'));
+});
 
 app.post('/saveUser', function(req, res) {
   let { username, password } = req.body;
@@ -173,6 +184,33 @@ app.get('/getAllTags', function(req, res) {
     res.sendStatus(500);
   });
 });
+
+app.post('/addcomments', function(req, res) {
+  let {content, nickname, email, website, id} = req.body
+  let createTime = new Date().getTime()
+  articleModel.findByIdAndUpdate(id, {'$push':{
+    'comments': {
+      content: content,
+      website: website,
+      nickname: nickname,
+      email: email,
+      createTime: createTime,
+      belondId: id
+    }
+  }}).then(_ => {
+    res.sendStatus(200);
+  }).catch(e => {
+    res.sendStatus(500);
+  });
+});
+
+app.get('/getComments', function( req, res) {
+  articleModel.find().distinct('comments').exec().then(comments => {
+    res.send(comments)
+  }).catch(_ => {
+    res.sendStatus(500)
+  })
+})
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');

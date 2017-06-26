@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="preview">
-      <p v-html='compiledMarkdown'></p>
+      <p v-html='this.content'></p>
     </div>
   </div>
 </template>
@@ -50,14 +50,6 @@ export default {
   },
   created () {
     this.getArticle()
-  },
-
-  computed: {
-    compiledMarkdown: function () {
-      return Marked(this.content, {
-        sanitize: true
-      })
-    }
   },
   methods: {
     getArticle () {

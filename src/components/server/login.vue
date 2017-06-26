@@ -3,12 +3,11 @@
       <div class="">
         <div class="login">
           <el-input v-model='username' placeholder="请输入账号"></el-input>
-          <el-input v-model='password' placeholder="请输入密码"></el-input>
+          <el-input v-model='password' type='password' placeholder="请输入密码"></el-input>
         </div>
         <div class="login-btn">
           <el-button type="success" @click='login'>登录</el-button>
           <el-button type="info" @click='reset'>重置</el-button>
-          <el-button type="info" @click='addUser'>注册</el-button>
         </div>
       </div>
     </div>
@@ -25,26 +24,24 @@ export default {
     }
   },
   methods: {
-
-    addUser () {
-      axios.post(`http://localhost:3000/saveUser`, {
-        username: this.username,
-        password: this.password
-      }).then(response => {
-        console.log(response)
-      })
-    },
-
     login () {
-      if (this.username === '' || this.password === '') return
+      if (this.username === '' || this.password === '') {
+        this.$message({
+          type: 'error',
+          message: '请输入账号或密码！'
+        })
+      }
       axios.post(`http://localhost:3000/back/login`, {
         username: this.username,
         password: this.password
       }).then(response => {
-        if (response.data === 'no such user' || response.data === 'password incorrect' || response.data === 'no login') {
-          this.$router.push({
-            name: 'login'
+        if (response.data === 'no such user' || response.data === 'password incorrect') {
+          this.$message({
+            type: 'error',
+            message: '账号或密码错误！'
           })
+          this.username = ''
+          this.password = ''
           return
         }
         this.$router.push({
