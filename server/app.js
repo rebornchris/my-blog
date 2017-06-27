@@ -81,6 +81,21 @@ app.get('/', function(req, res) {
   res.sendFile(path.resolve('../dist/index.html'));
 });
 
+app.use('/back', function(req, res, next) {
+  let token = req.cookies.token;
+
+  if(token) {
+    let decodedToken = jwt.verify(token, cert);
+    userModel.findById(decodedToken.id).then(_ => {
+      next();
+    }).catch(_ => {
+      res.send('no login');
+    });
+  } else {
+    res.send('no login');
+  }
+});
+
 app.post('/saveUser', function(req, res) {
   let { username, password } = req.body;
 
