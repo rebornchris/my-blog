@@ -32,7 +32,7 @@ export default {
           message: '请输入账号或密码！'
         })
       }
-      axios.post(`${URL.BASE_URL}/back/login`, {
+      axios.post(`${URL.BASE_URL}/login`, {
         username: this.username,
         password: this.password
       }).then(response => {

@@ -94,7 +94,7 @@ app.use('/back', function(req, res, next) {
   } else {
     res.send('no login');
   }
-});
+});a
 
 app.post('/saveUser', function(req, res) {
   let { username, password } = req.body;
@@ -166,7 +166,7 @@ app.get('/getArticle', function(req, res) {
   })
 });
 
-app.post('/back/login', function(req, res) {
+app.post('/login', function(req, res) {
   let { username, password } = req.body;
 
   userModel.findOne({username: username}).then(user => {
