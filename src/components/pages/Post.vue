@@ -35,6 +35,7 @@
 import axios from 'axios'
 import Slider from '../common/slider.vue'
 import Tools from '../../config/tools'
+import URL from '../../../config/url'
 require('../../css/markdown.css')
 export default {
   components: {
@@ -51,7 +52,7 @@ export default {
   },
   methods: {
     getAllTitle () {
-      axios.get('http://localhost:3000/getArticles').then(response => {
+      axios.get(`${URL.BASE_URL}/getArticles`).then(response => {
         this.titleList = response.data
       })
     },

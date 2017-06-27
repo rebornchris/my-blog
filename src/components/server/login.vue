@@ -15,6 +15,7 @@
 
 <script>
 import axios from 'axios'
+import URL from '../../../config/url.js'
 export default {
   name: 'Login',
   data () {
@@ -31,7 +32,7 @@ export default {
           message: '请输入账号或密码！'
         })
       }
-      axios.post(`http://localhost:3000/back/login`, {
+      axios.post(`${URL.BASE_URL}/back/login`, {
         username: this.username,
         password: this.password
       }).then(response => {

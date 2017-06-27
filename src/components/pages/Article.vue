@@ -61,6 +61,7 @@
 import axios from 'axios'
 import Slider from '../common/slider.vue'
 import Tools from '../../config/tools'
+import URL from '../../../config/url'
 require('../../css/markdown.css')
 export default {
   components: {
@@ -85,7 +86,7 @@ export default {
   },
   methods: {
     getArticleById () {
-      axios.get(`http://localhost:3000/getArticle`, {
+      axios.get(`${URL.BASE_URL}/getArticle`, {
         params: {
           id: this.$route.params.id
         }
@@ -103,7 +104,7 @@ export default {
           })
         return
       }
-      axios.post('http://localhost:3000/addcomments', {
+      axios.post(`${URL.BASE_URL}/addcomments`, {
         id: this.$route.params.id,
         content: this.comments,
         email: this.email,
@@ -123,7 +124,6 @@ export default {
     },
     reply (t) {
       this.comments = `@${t} `
-      console.log(this.comments)
     },
     formatDate (time) {
       let temp = Tools.frontFormatDate(time)

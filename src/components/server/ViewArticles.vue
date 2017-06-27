@@ -33,6 +33,7 @@
 
 <script>
 import axios from 'axios'
+import URL from '../../../config/url.js'
 import Tools from '../../config/tools'
 export default {
   name: 'ViewArticles',
@@ -46,7 +47,7 @@ export default {
   },
   methods: {
     getArticlesInfo () {
-      axios.get('http://localhost:3000/back/getArticlesInfo').then(response => {
+      axios.get(`${URL.BASE_URL}/back/getArticlesInfo`).then(response => {
         if (response.data === 'no login') {
           this.$router.push({name: 'login'})
           return
@@ -60,7 +61,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.get('http://localhost:3000/back/deleteArticle', {
+        axios.get(`${URL.BASE_URL}/back/deleteArticle`, {
           params: {
             id
           }

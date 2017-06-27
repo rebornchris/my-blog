@@ -32,6 +32,7 @@
 <script>
 import axios from 'axios'
 import { markdownEditor } from 'vue-simplemde'
+import URL from '../../../config/url'
 import Marked from '../../config/marked'
 export default {
   components: {
@@ -56,7 +57,7 @@ export default {
 
     post () {
       if (this.title === '' || this.content === '' || this.createTime === '' || this.tags === '') return
-      axios.post('http://localhost:3000/back/saveArticle', {
+      axios.post(`${URL.BASE_URL}/back/saveArticle`, {
         title: this.title,
         createTime: new Date(this.createTime).getTime(),
         tags: this.tags,

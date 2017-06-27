@@ -33,6 +33,7 @@
 import axios from 'axios'
 import { markdownEditor } from 'vue-simplemde'
 import Marked from 'marked'
+import URL from '../../../config/url'
 import Tools from '../../config/tools'
 
 export default {
@@ -53,12 +54,11 @@ export default {
   },
   methods: {
     getArticle () {
-      axios.get('http://localhost:3000/back/getArticle', {
+      axios.get(`${URL.BASE_URL}/back/getArticle`, {
         params: {
           id: this.$route.params.id
         }
       }).then(res => {
-        console.log(res)
         this.id = res.data._id
         this.title = res.data.title
         this.content = res.data.content
@@ -76,7 +76,7 @@ export default {
 
     saveArticleChange () {
       if (this.title === '' || this.createTime === '' || this.tags === '' || this.content === '') return
-      axios.post('http://localhost:3000/back/changeArticle', {
+      axios.post(`${URL.BASE_URL}/back/changeArticle`, {
         id: this.id,
         title: this.title,
         createTime: Tools.backFormatDate(this.createTime),

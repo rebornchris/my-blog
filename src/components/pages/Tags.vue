@@ -56,6 +56,7 @@
 <script>
 import Slider from '../common/slider.vue'
 import Icon from 'vue-awesome/components/Icon'
+import URL from '../../../config/url'
 import axios from 'axios'
 export default {
   data () {
@@ -81,7 +82,7 @@ export default {
       this.flag = !this.flag
     },
     getAllTitle () {
-      axios.get('http://localhost:3000/getArticles').then(response => {
+      axios.get(`${URL.BASE_URL}/getArticles`).then(response => {
         this.articlesList = response.data
         let items = []
         let flag = {}
@@ -111,7 +112,7 @@ export default {
     },
     getTagsArticles (arr) {
       arr.map(tag => {
-        axios.get('http://localhost:3000/getArticlesByTag', {
+        axios.get(`${URL.BASE_URL}/getArticlesByTag`, {
           params: {
             tag: tag
           }
