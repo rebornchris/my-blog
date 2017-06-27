@@ -94,7 +94,7 @@ app.use('/back', function(req, res, next) {
   } else {
     res.send('no login');
   }
-});a
+});
 
 app.post('/saveUser', function(req, res) {
   let { username, password } = req.body;
