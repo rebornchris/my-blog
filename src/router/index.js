@@ -60,7 +60,7 @@ export default new Router({
       component: viewArticles
     },
     {
-      path: '/back/changeArticle',
+      path: '/back/changeArticle/:id',
       name: 'changeArticle',
       component: changeArticle
     }

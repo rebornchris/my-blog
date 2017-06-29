@@ -7,6 +7,8 @@ let session = require('express-session')
 let bcrypt = require('bcrypt')
 let jwt = require('jsonwebtoken')
 
+const cert = 'rebornchris';
+
 app.use('/static', express.static('../dist/static'));
 // app.set('trust proxy', 1); // trust first proxy
 app.use(session({
@@ -19,7 +21,6 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.all('*',function (req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8080')
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With')
@@ -33,7 +34,6 @@ app.all('*',function (req, res, next) {
   }
 })
 
-const cert = 'rebornchris';
 
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
@@ -63,6 +63,25 @@ const userSchema = new mongoose.Schema({
 const articleModel = db.model('article', articleSchema) // newClass为创建或选中的集合
 const userModel = db.model('user', userSchema)
 
+app.use('/back', function(req, res, next) {
+  console.log(req.cookies)
+  let token = req.cookies.token;
+  if(token) {
+    let decodedToken = jwt.verify(token, cert);
+    userModel.findById(decodedToken.id).then(_ => {
+      next();
+    }).catch(_ => {
+      res.send('no login');
+    });
+  } else {
+    res.send('no login');
+  }
+});
+
+app.get('/', function(req, res) {
+  res.sendFile(path.resolve('../dist/index.html'));
+});
+
 app.post('/back/saveArticle', function(req, res) {
   let { title, content, createTime, tags } = req.body;
   articleModel.create({
@@ -77,28 +96,8 @@ app.post('/back/saveArticle', function(req, res) {
   });
 });
 
-app.get('/', function(req, res) {
-  res.sendFile(path.resolve('../dist/index.html'));
-});
-
-app.use('/back', function(req, res, next) {
-  let token = req.cookies.token;
-
-  if(token) {
-    let decodedToken = jwt.verify(token, cert);
-    userModel.findById(decodedToken.id).then(_ => {
-      next();
-    }).catch(_ => {
-      res.send('no login');
-    });
-  } else {
-    res.send('no login');
-  }
-});
-
 app.post('/saveUser', function(req, res) {
   let { username, password } = req.body;
-
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(password, salt, function(err, passwordHash) {
       userModel.create({ username, passwordHash }, function(err) {

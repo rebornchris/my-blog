@@ -8,6 +8,7 @@
         <div class="login-btn">
           <el-button type="success" @click='login'>登录</el-button>
           <el-button type="info" @click='reset'>重置</el-button>
+          <el-button type="info" @click='addUser'>注册</el-button>
         </div>
       </div>
     </div>
@@ -25,6 +26,17 @@ export default {
     }
   },
   methods: {
+    addUser () {
+      axios.post(`${URL.BASE_URL}/saveUser`, {
+        username: this.username,
+        password: this.password
+      }).then(response => {
+        this.$message({
+          type: 'success',
+          message: '注册成功'
+        })
+      })
+    },
     login () {
       if (this.username === '' || this.password === '') {
         this.$message({
@@ -39,7 +51,7 @@ export default {
         if (response.data === 'no such user' || response.data === 'password incorrect') {
           this.$message({
             type: 'error',
-            message: '账号或密码错误！'
+            message: response.data
           })
           this.username = ''
           this.password = ''
