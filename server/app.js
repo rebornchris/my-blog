@@ -63,20 +63,20 @@ const userSchema = new mongoose.Schema({
 const articleModel = db.model('article', articleSchema) // newClass为创建或选中的集合
 const userModel = db.model('user', userSchema)
 
-app.use('/back', function(req, res, next) {
-  console.log(req.cookies)
-  let token = req.cookies.token;
-  if(token) {
-    let decodedToken = jwt.verify(token, cert);
-    userModel.findById(decodedToken.id).then(_ => {
-      next();
-    }).catch(_ => {
-      res.send('no login');
-    });
-  } else {
-    res.send('no login');
-  }
-});
+// app.use('/back', function(req, res, next) {
+//   console.log(req.cookies)
+//   let token = req.cookies.token;
+//   if(token) {
+//     let decodedToken = jwt.verify(token, cert);
+//     userModel.findById(decodedToken.id).then(_ => {
+//       next();
+//     }).catch(_ => {
+//       res.send('no login');
+//     });
+//   } else {
+//     res.send('no login');
+//   }
+// });
 
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('../dist/index.html'));
