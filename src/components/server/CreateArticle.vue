@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="preview">
-      <p v-html='this.content'></p>
+      <p v-html='compiledMarkdown'></p>
     </div>
   </div>
 </template>
@@ -47,6 +47,13 @@ export default {
       title: ''
     }
   },
+  computed: {
+    compiledMarkdown: function () {
+      return Marked(this.content, {
+        sanitize: true
+      })
+    }
+  },
   methods: {
     init () {
       this.content = ''
@@ -61,7 +68,8 @@ export default {
         title: this.title,
         createTime: new Date(this.createTime).getTime(),
         tags: this.tags,
-        content: Marked(this.content)
+        content: Marked(this.content),
+        markdown: this.content
       }).then(response => {
         this.$router.push({name: 'Post'})
       })

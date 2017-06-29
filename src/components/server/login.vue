@@ -43,6 +43,7 @@ export default {
           type: 'error',
           message: '请输入账号或密码！'
         })
+        return
       }
       axios.post(`${URL.BASE_URL}/login`, {
         username: this.username,

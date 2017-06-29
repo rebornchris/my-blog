@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="preview">
-      <p v-html='this.content'></p>
+      <p v-html='compiledMarkdown'></p>
     </div>
   </div>
 </template>
@@ -52,6 +52,13 @@ export default {
   created () {
     this.getArticle()
   },
+  computed: {
+    compiledMarkdown: function () {
+      return Marked(this.content, {
+        sanitize: true
+      })
+    }
+  },
   methods: {
     getArticle () {
       axios.get(`${URL.BASE_URL}/back/getArticle`, {
@@ -61,7 +68,7 @@ export default {
       }).then(res => {
         this.id = res.data._id
         this.title = res.data.title
-        this.content = res.data.content
+        this.content = res.data.markdown
         this.createTime = Tools.frontFormatDate(res.data.createTime)
         this.tags = res.data.tags
       })
@@ -81,7 +88,8 @@ export default {
         title: this.title,
         createTime: Tools.backFormatDate(this.createTime),
         tags: this.tags,
-        content: this.content
+        markdown: this.content,
+        content: Marked(this.content)
       }).then(res => {
         this.$router.push({
           name: 'viewArticles'

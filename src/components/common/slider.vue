@@ -24,6 +24,7 @@
 <script>
 
 import axios from 'axios'
+import URL from '../../../config/url'
 export default {
   data () {
     return {
@@ -35,7 +36,7 @@ export default {
   },
   methods: {
     getAllTitle () {
-      axios.get('http://localhost:3000/getArticles').then(response => {
+      axios.get(`${URL.BASE_URL}/getArticles`).then(response => {
         this.sliderTitle = response.data.splice(0, 5)
       })
     }

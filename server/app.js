@@ -49,6 +49,7 @@ db.once('open', (callback) => {
 const articleSchema = new mongoose.Schema({
     title: String,
     content: String,
+    markdown: String,
     createTime: Number,
     tags: String,
     comments: []
@@ -63,32 +64,18 @@ const userSchema = new mongoose.Schema({
 const articleModel = db.model('article', articleSchema) // newClass为创建或选中的集合
 const userModel = db.model('user', userSchema)
 
-// app.use('/back', function(req, res, next) {
-//   console.log(req.cookies)
-//   let token = req.cookies.token;
-//   if(token) {
-//     let decodedToken = jwt.verify(token, cert);
-//     userModel.findById(decodedToken.id).then(_ => {
-//       next();
-//     }).catch(_ => {
-//       res.send('no login');
-//     });
-//   } else {
-//     res.send('no login');
-//   }
-// });
-
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('../dist/index.html'));
 });
 
 app.post('/back/saveArticle', function(req, res) {
-  let { title, content, createTime, tags } = req.body;
+  let { title, content, markdown, createTime, tags } = req.body;
   articleModel.create({
     title,
     content,
+    markdown,
     createTime,
-    tags
+    tags,
   }).then(article => {
     res.send(article);
   }).catch(_ => {
@@ -141,11 +128,12 @@ app.get('/back/getArticle', function(req, res) {
 });
 
 app.post('/back/changeArticle', function(req, res) {
-  let { id, title, content, createTime, tags } = req.body;
+  let { id, title, content, markdown, createTime, tags } = req.body;
 
   articleModel.findByIdAndUpdate(id, {
     title,
     content,
+    markdown,
     createTime,
     tags
   }, {
