@@ -50,6 +50,7 @@ export default {
       axios.get(`${URL.BASE_URL}/back/getArticlesInfo`).then(response => {
         if (response.data === 'no login') {
           this.$router.push({name: 'login'})
+          return
         }
         this.articles = response.data
       })

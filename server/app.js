@@ -98,18 +98,6 @@ app.post('/back/saveArticle', function(req, res) {
   });
 });
 
-app.post('/saveUser', function(req, res) {
-  let { username, password } = req.body;
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, passwordHash) {
-      userModel.create({ username, passwordHash }, function(err) {
-        res.sendStatus(200);
-      })
-    });
-  });
-
-});
-
 app.get('/getArticles', function(req, res) {
   articleModel.find().sort({createTime: -1}).then(articles => {
     res.send(articles);
